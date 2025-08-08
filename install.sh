@@ -25,6 +25,9 @@
 set -eo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
+python -m venv mini-ndn-pyenv
+source ./mini-ndn-pyenv/bin/activate
+
 # These commands are generally installed on most systems. If not, user must install manually.
 # 'sudo' is not directly used by this script, but Mininet install.sh uses it, so we check that also.
 NEEDED_BINARIES=(
