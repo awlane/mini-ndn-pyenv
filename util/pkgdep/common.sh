@@ -65,7 +65,7 @@ build_INFOEDIT() {
   $SUDO make install
 }
 build_MININET() {
-  eval "$(source ./mini-ndn-pyenv/bin/activate)" && ./util/install.sh -s ${CODEROOT} -nv
+  source ./mini-ndn-pyenv/bin/activate && ./util/install.sh -s ${CODEROOT} -nv
   if ! command -v ofdatapath >/dev/null; then
     rm -rf ${CODEROOT}/openflow
     ./util/install.sh -s ${CODEROOT} -f
@@ -96,7 +96,7 @@ EOT
 
   # issue: util/install.sh is not using 'sudo' where needed such as 'make install'
   # workaround: run whole script in 'sudo'
-  $SUDO bash -c 'eval "$(source ./mini-ndn-pyenv/bin/activate)" && env PYTHON=$PYTHON ./util/install.sh -Wl'
+  source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && $SUDO env PYTHON=$PYTHON ./util/install.sh -Wl'
 
   # issue: setup.py reports "Cannot load backend 'TkAgg' which requires the 'tk' interactive
   # framework, as 'headless' is currently running" when running over SSH
@@ -306,8 +306,8 @@ $SUDO install -d -m0755 "$DESTDIR"
 find topologies/ -name '*.conf' | xargs $SUDO install -m0644 -t "$DESTDIR/"
 
 echo "Installing Python dependencies"
-$SUDO $PYTHON -m pip install -r requirements.txt
+source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && pip install -r requirements.txt
 
-$SUDO $PYTHON setup.py develop
+source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && $SUDO $PYTHON setup.py develop
 
 echo 'MiniNDN installation completed successfully'

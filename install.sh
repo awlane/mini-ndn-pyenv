@@ -25,7 +25,9 @@
 set -eo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-python -m venv mini-ndn-pyenv
+rm -r ./mini-ndn-pyenv
+sudo apt install python3.12-venv
+python3 -m venv mini-ndn-pyenv
 source ./mini-ndn-pyenv/bin/activate
 
 # These commands are generally installed on most systems. If not, user must install manually.
