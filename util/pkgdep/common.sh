@@ -40,7 +40,7 @@ DEP_INFO=(
   ["TOOLS"]="ndn-tools,NDN Essential Tools,ndn-tools,https://github.com/named-data/ndn-tools.git,ndn-tools"
   ["TRAFFIC"]="ndn-traffic-generator,NDN Traffic Generator,ndn-traffic-generator,https://github.com/named-data/ndn-traffic-generator.git,ndn-traffic-generator"
   ["INFOEDIT"]="infoedit,infoedit,,https://github.com/NDN-Routing/infoedit.git,"
-  ["MININET"]="mininet,Mininet,,https://github.com/mininet/mininet.git,"
+  ["MININET"]="mininet,Mininet,,https://github.com/awlane/mininet-2404-fixes,"
   ["MNWIFI"]="mininet-wifi,Mininet-WiFi,,https://github.com/intrig-unicamp/mininet-wifi.git,"
 )
 
@@ -96,7 +96,7 @@ EOT
 
   # issue: util/install.sh is not using 'sudo' where needed such as 'make install'
   # workaround: run whole script in 'sudo'
-  source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && $SUDO env PYTHON=$PYTHON ./util/install.sh -Wl'
+  source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && $SUDO env PYTHON=$PYTHON ./util/install.sh -Wl
 
   # issue: setup.py reports "Cannot load backend 'TkAgg' which requires the 'tk' interactive
   # framework, as 'headless' is currently running" when running over SSH
