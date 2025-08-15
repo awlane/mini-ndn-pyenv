@@ -65,10 +65,10 @@ build_INFOEDIT() {
   $SUDO make install
 }
 build_MININET() {
-  source ./mini-ndn-pyenv/bin/activate && ./util/install.sh -s ${CODEROOT} -nv
+  source /home/tester/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && ./util/install.sh -s ${CODEROOT} -nv
   if ! command -v ofdatapath >/dev/null; then
     rm -rf ${CODEROOT}/openflow
-    ./util/install.sh -s ${CODEROOT} -f
+    source /home/tester/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && ./util/install.sh -s ${CODEROOT} -f
   fi
 
   $SUDO $PYTHON setup.py develop
