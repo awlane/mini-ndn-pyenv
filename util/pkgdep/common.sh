@@ -65,10 +65,10 @@ build_INFOEDIT() {
   $SUDO make install
 }
 build_MININET() {
-  source /home/tester/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && ./util/install.sh -s ${CODEROOT} -nv
+  source $VENV_PATH && ./util/install.sh -s ${CODEROOT} -nv
   if ! command -v ofdatapath >/dev/null; then
     rm -rf ${CODEROOT}/openflow
-    source /home/tester/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && ./util/install.sh -s ${CODEROOT} -f
+    source $VENV_PATH && ./util/install.sh -s ${CODEROOT} -f
   fi
 
   $SUDO $PYTHON setup.py develop
@@ -256,6 +256,22 @@ if [[ $CONFIRM -ne 1 ]]; then
   read -p 'Press ENTER to continue or CTRL+C to abort '
 fi
 
+if [[ $DL_ONLY -ne 1 ]]; then
+  echo "Setting up Python virtual environment at ./mini-ndn-pyenv..."
+  if [[ $CONFIRM -ne 1 ]]; then
+    if [[ $USE_EXISTING -eq 1 ]]; then
+      if [-d './mini-ndn-pyenv']; then
+          read -p 'Removing existing Python environment, press ENTER to continue or CTRL+C to abort. Use --use-existing to skip this step.'
+          rm -r ./mini-ndn-pyenv
+      fi
+    fi
+  fi
+  python3 -m venv mini-ndn-pyenv
+  LOCAL_PYTHON_PATH=$(dirname `which python3`)
+  VENV_PATH="${LOCAL_PYTHON_PATH}/activate"
+  source $VENV_PATH
+fi
+
 install_pkgs
 
 if [[ -z $SKIPPYTHONCHECK ]]; then
@@ -306,8 +322,8 @@ $SUDO install -d -m0755 "$DESTDIR"
 find topologies/ -name '*.conf' | xargs $SUDO install -m0644 -t "$DESTDIR/"
 
 echo "Installing Python dependencies"
-source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && pip install -r requirements.txt
+source $VENV_PATH && pip install -r requirements.txt
 
-source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && $SUDO $PYTHON setup.py develop
+source $VENV_PATH && $SUDO $PYTHON setup.py develop
 
 echo 'MiniNDN installation completed successfully'

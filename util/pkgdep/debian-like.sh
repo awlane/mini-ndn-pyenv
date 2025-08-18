@@ -44,6 +44,7 @@ APT_PKGS=(
   pkg-config
   python-is-python3
   python3-pip
+  python3-venv
   software-properties-common
   tshark
 )
