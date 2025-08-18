@@ -22,7 +22,7 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 # needed by Python version detection logic in Mininet install script
-export PYTHON=python3
+# export PYTHON=python3
 
 # DEP_INFO key should match *_VERSION variable name.
 # DEP_INFO entry should have these comma separated fields:
@@ -96,7 +96,7 @@ EOT
 
   # issue: util/install.sh is not using 'sudo' where needed such as 'make install'
   # workaround: run whole script in 'sudo'
-  source ~/mini-ndn-pyenv/mini-ndn-pyenv/bin/activate && $SUDO env PYTHON=$PYTHON ./util/install.sh -Wl
+  source $VENV_PATH && $SUDO env PYTHON=$PYTHON ./util/install.sh -Wl
 
   # issue: setup.py reports "Cannot load backend 'TkAgg' which requires the 'tk' interactive
   # framework, as 'headless' is currently running" when running over SSH
@@ -272,6 +272,7 @@ if [[ $DL_ONLY -ne 1 ]]; then
   source ./mini-ndn-pyenv/bin/activate
   # Get absolute path of venv for future invocations
   LOCAL_PYTHON_PATH=$(dirname `which python3`)
+  export PYTHON=$LOCAL_PYTHON_PATH
   VENV_PATH="${LOCAL_PYTHON_PATH}/activate"
 fi
 
