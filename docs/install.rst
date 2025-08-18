@@ -14,6 +14,15 @@ Ubuntu 24.04 LTS is not currently supported due to issues with required librarie
 You must have sudo privileges to install and run Mini-NDN. Accordingly, virtualization is generally recommended for users
 on their personal machines.
 
+Mini-NDN now uses a virtual environment for managing Python dependencies; this is necessary for Ubuntu 24.04 and onward.
+This is handled automatically during installation. When adding any additional Python packages, please ensure installation is
+done under the virtual environment located under `mini-ndn-pyenv`. This environment can be enabled at any time from the `mini-ndn`
+directory via this command:
+
+.. code-block:: sh
+
+    sudo source ./mini-ndn-pyenv/bin/activate
+
 `Issues <https://redmine.named-data.net/issues/5368>`__ have been reported for Windows host systems using VirtualBox 7
 or VMWare Workstation 16 as a hypervisor. It is recommended that users use VMWare Workstation 17 or use Linux as a host
 operating system when using virtual machines, especially for work intended to be reproducible.
@@ -95,7 +104,8 @@ Some notable flags are:
 - ``--ppa`` prefers installing NDN software from the `named-data PPA <https://launchpad.net/~named-data/+archive/ubuntu/ppa>`__.
   This shortens installation time by downloading binary packages, but is only available on Ubuntu.
 - ``--source`` prefers installing NDN software from source code.
-- ``--use-existing`` will only install dependencies not already in the executable path.
+- ``--use-existing`` will only install dependencies not already in the executable path. This will also prevent the Python virtualenv
+  from being recreated if it already exists.
 - ``--dummy-keychain`` patches ndn-cxx to use an in-memory dummy KeyChain, which reduces CPU overhead
   and allows you to scale up Mini-NDN experiments. Large Mini-NDN experiments would run significantly
   faster after applying this patch. However, your experiments cannot use any NDN security related
@@ -205,6 +215,12 @@ To install infoedit:
 
 Verification
 ------------
+
+First, ensure you are running under the virtual environment. This can be accomplished
+via
+.. code-block:: sh
+
+    sudo source ./mini-ndn-pyenv/bin/activate
 
 You can execute the following example to bring up the Mini-NDN command line
 with NFD and NLSR running on each node:

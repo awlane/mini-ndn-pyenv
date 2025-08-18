@@ -168,7 +168,8 @@ Misc options:
       You may modify the code in ${CODEROOT} and then rerun this script to install them.
   --use-existing
       Use already installed dependency binaries and libraries, rather than attempting to
-      reinstall. This is useful if you have modified source code checkout for some
+      reinstall. This includes the Python virtual environment under ./mini-ndn-pyenv .
+      This is useful if you have modified source code checkout for some
       repositories but still want to install any remaining dependencies or are
       reinstalling Mini-NDN.
 EOT

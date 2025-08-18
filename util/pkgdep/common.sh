@@ -256,6 +256,8 @@ if [[ $CONFIRM -ne 1 ]]; then
   read -p 'Press ENTER to continue or CTRL+C to abort '
 fi
 
+install_pkgs
+
 if [[ $DL_ONLY -ne 1 ]]; then
   echo "Setting up Python virtual environment at ./mini-ndn-pyenv..."
   if [[ $CONFIRM -ne 1 ]]; then
@@ -267,12 +269,11 @@ if [[ $DL_ONLY -ne 1 ]]; then
     fi
   fi
   python3 -m venv mini-ndn-pyenv
+  source ./mini-ndn-pyenv/bin/activate
+  # Get absolute path of venv for future invocations
   LOCAL_PYTHON_PATH=$(dirname `which python3`)
   VENV_PATH="${LOCAL_PYTHON_PATH}/activate"
-  source $VENV_PATH
 fi
-
-install_pkgs
 
 if [[ -z $SKIPPYTHONCHECK ]]; then
   PYTHON_VERSION=$($PYTHON --version)

@@ -136,6 +136,12 @@ such as ndnpingserver is run in ``minindn/helpers/experiment.py``.
 Execution
 ---------
 
+First, ensure you are running under the virtual environment. This can be accomplished via
+
+.. code-block:: sh
+
+    sudo source ./mini-ndn-pyenv/bin/activate
+
 To run Mini-NDN with the default topology, ``topologies/default-topology.conf``, type:
 
 .. code-block:: sh
